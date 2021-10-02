@@ -9,7 +9,7 @@ const Home = () => {
       <div className={styles.findADonorContainer}>
         <div className={styles.donorCount}>
           <span className={styles.donorNumber}>120966</span>
-          <span className={styles.donorText}>Donor's</span>
+          <span className={styles.donorText}>Donor&apos;s</span>
         </div>
         <button
           className={styles.findButton}
@@ -31,7 +31,7 @@ const Home = () => {
 
       <div className={styles.mainQuote}>
         <blockquote>
-          "The blood is red gold in time of saving a life."
+          &quot;The blood is red gold in time of saving a life.&quot;
         </blockquote>
       </div>
     </div>

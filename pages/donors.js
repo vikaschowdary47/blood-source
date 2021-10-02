@@ -30,7 +30,7 @@ const Donors = () => {
         <div className={styles.findADonorContainer}>
           <div className={styles.donorCount}>
             <span className={styles.donorNumber}>120966</span>
-            <span className={styles.donorText}>Donor's</span>
+            <span className={styles.donorText}>Donors</span>
           </div>
           <button
             className={styles.findButton}

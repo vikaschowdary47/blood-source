@@ -191,8 +191,8 @@ const FindADonor = () => {
                         className={styles.checkmark}
                         required
                       />
-                      By confirming you agree that you're not going to mis-use
-                      donor's details.
+                      By confirming you agree that you&apos;re not going to
+                      mis-use donor&apos;s details.
                     </div>
                   </div>
 
