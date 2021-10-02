@@ -1,0 +1,85 @@
+.findADonorContainer{
+    padding: 15px;
+    /* height: 100vh; */
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+
+}
+.nav svg{
+    margin-right: 20px;
+    width: 32px;
+    height: 25px;
+}
+.nav h1{
+    margin: 0;
+    font-size:22px;
+    font-weight:600;
+}
+
+.fieldContainer{
+    margin: 20px 0;
+    padding: 0 10px
+}
+.button{
+    background-color:#FF215D;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight:600;
+    width:100%;
+    border:none;
+    padding:10px;
+    color:white;
+}
+
+.button:hover{
+    background-color:#FF215D;
+    border:none
+}
+
+.defaultFormValue{
+    color:grey
+}
+.optionValue{
+    color:black
+}
+.checkboxContainer{
+    display: flex;
+    align-items: center;
+}
+.customCheckbox{
+    height:20px;
+    width:20px;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.checkedBox{
+    margin-right: 10px;
+    margin-left: 5px;
+    display: flex;
+}
+/* 
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  } */
+  
+
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    margin-right: 15px;
+  }

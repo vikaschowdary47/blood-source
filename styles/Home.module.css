@@ -1,0 +1,84 @@
+.homeContainer{
+  /* position: relative; */
+  /* height: 100vh */
+}
+
+.mainBannerImage{
+  width:100%;
+  height:60vh;
+  position: absolute;
+  top: 0;
+  z-index: -100;
+}
+
+.findADonorContainer{
+  background: #E9526C;
+  padding:43px 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 66px 26px 0 26px;
+}
+
+.donorCount{
+  color:#FEFEFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.donorNumber{
+  font-size: 22px;
+}
+.donorText{
+  font-size: 14px;
+}
+
+.findButton{
+  padding: 12px 20px;
+  border: none;
+  outline: none;
+  background:white;
+
+  border-radius:24px
+}
+
+.findButtonText{
+  color:#FF275B;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.becomeADonorContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 20px ;
+}
+
+.becomeButton{
+  padding: 16px 24px;
+  border: none;
+  outline: none;
+  background:white;
+  border-radius:24px
+}
+.becomeButtonText{
+  color:#FF275B;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.mainQuote{
+  margin-top:150px
+}
+.mainQuote blockquote{
+  margin-top:150px;
+  text-align:center;
+  color:#FF275B;
+  font-weight: 900;
+  font-size: 20px;
+  margin: 0 5px;
+}

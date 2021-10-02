@@ -1,0 +1,59 @@
+.DonorContainer{
+    /* padding: 15px; */
+    height: 100vh;
+   background-color:#EFEFEF;
+}
+
+.innerContainer{
+    background-image: url('/images/redBanner.png');
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height:300px;
+    padding: 15px;
+}
+
+
+.findADonorContainer{
+    background: #E9526C;
+    padding:43px 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 25px 5px 0 5px;
+  }
+  
+  .donorCount{
+    color:#FEFEFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .donorNumber{
+    font-size: 22px;
+  }
+  .donorText{
+    font-size: 14px;
+  }
+  
+
+.findButton{
+    padding: 12px 20px;
+    border: none;
+    outline: none;
+    background:white;
+    border-radius:24px
+  }
+  
+  .findButtonText{
+    color:#FF275B;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .donorDetailsBody{
+      margin-top:50px
+  }
