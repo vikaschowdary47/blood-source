@@ -2,14 +2,13 @@ import React from "react";
 import Router from "next/router";
 import styles from "../styles/Home.module.css";
 
-const Home = () => {
-
+const Home = ({donors}) => {
   return (
     <div className={styles.homeContainer}>
       <img src="/images/redBanner.png" className={styles.mainBannerImage} />
       <div className={styles.findADonorContainer}>
         <div className={styles.donorCount}>
-          <span className={styles.donorNumber}>120966</span>
+          <span className={styles.donorNumber}>{donors.length}</span>
           <span className={styles.donorText}>Donor&apos;s</span>
         </div>
         <button
@@ -39,4 +38,15 @@ const Home = () => {
   );
 };
 
+
 export default Home;
+
+
+export const getServerSideProps = async () => {
+ const getDonors = await fetch(`${process.env.API_PATH}/api/getDonors`)
+ const donors = await getDonors.json();
+
+ return {
+  props:{donors}
+ }
+}

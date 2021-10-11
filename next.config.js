@@ -6,5 +6,9 @@ module.exports = {
     passoo_secret_key: process.env.passoo_secret_key,
     passoo_default_otp: process.env.passoo_default_otp,
     FAUNADB_SECRET_KEY: process.env.FAUNADB_SECRET_KEY,
+    API_PATH:
+      process.env.NODE_ENV !== "production"
+        ? "http://localhost:3000"
+        : "https://blood-source.vercel.app",
   },
 };
