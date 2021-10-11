@@ -2,7 +2,7 @@ import React from "react";
 import Router from "next/router";
 import styles from "../styles/Home.module.css";
 
-const Home = ({donors}) => {
+const Home = ({donors}:any) => {
   return (
     <div className={styles.homeContainer}>
       <img src="/images/redBanner.png" className={styles.mainBannerImage} />

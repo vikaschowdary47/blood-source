@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "pages/find-a-donor.jsx", "pages/donors.jsx", "pages/become-a-donor.jsx", "context/GlobalState.jsx", "pages/verify.jsx"  ],
   "exclude": [
     "node_modules"
   ]

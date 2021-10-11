@@ -1,6 +1,6 @@
-import React, {useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Router from "next/router";
-import {Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import styles from "../styles/FindADonor.module.css";
 import BackArrow from "../icons/BackArrow";
 import { Formik, Field, Form } from "formik";
@@ -27,17 +27,17 @@ const SignupSchema = Yup.object().shape({
 
 const BecomeADonor = () => {
   const globalState = useContext(GlobalContext);
-  const {state,setOtp,setBecomeADonorForm} = globalState
-  const {becomeADonorForm} = state;
+  const { state, setOtp, setBecomeADonorForm } = globalState;
+  const { becomeADonorForm } = state;
 
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  const getDistricts = (state:String) => {
+  const getDistricts = (state) => {
     const index = data.states.findIndex((item) => item.name === state);
     return data.states[index].districts;
   };
 
-  const getTowns = (state:String, district:String) => {
+  const getTowns = (state, district) => {
     const index = data.states.findIndex((item) => item.name === state);
     const stateIndex = data.states[index].districts;
     const districtIndex = stateIndex.findIndex(
@@ -64,23 +64,20 @@ const BecomeADonor = () => {
           <Formik
             initialValues={becomeADonorForm}
             validationSchema={SignupSchema}
-            onSubmit={async(values) => {
+            onSubmit={async (values) => {
               setLoading(true);
-              setBecomeADonorForm(values)
+              setBecomeADonorForm(values);
               const otp = Math.floor(1000 + Math.random() * 9000);
-              setOtp(otp)
-              const url = `https://cors.bridged.cc/${process.env.passoo_url}?key=${process.env.passoo_key}&secret=${process.env.passoo_secret_key}&from=FinWise&to=91${values.mobile}&text=OTP+for+registration+is+:+${otp}`
-              const sendOtpRequest = await fetch(
-                url,
-                {
-                  method: "GET",
-                  headers: { "Access-Control-Allow-Origin": "*" },
-                }          
-              )
-              const response = await sendOtpRequest.json()
-              if(response && response.status === '0'){
-              setLoading(false)
-                Router.push("/verify")
+              setOtp(otp);
+              const url = `https://cors.bridged.cc/${process.env.passoo_url}?key=${process.env.passoo_key}&secret=${process.env.passoo_secret_key}&from=FinWise&to=91${values.mobile}&text=OTP+for+registration+is+:+${otp}`;
+              const sendOtpRequest = await fetch(url, {
+                method: "GET",
+                headers: { "Access-Control-Allow-Origin": "*" },
+              });
+              const response = await sendOtpRequest.json();
+              if (response && response.status === "0") {
+                setLoading(false);
+                Router.push("/verify");
               }
             }}
           >
@@ -169,7 +166,7 @@ const BecomeADonor = () => {
                       </option>
                       {data.states.map((state, i) => (
                         <option
-                        key={i}
+                          key={i}
                           value={state.name}
                           className={styles.optionValue}
                         >
@@ -195,9 +192,9 @@ const BecomeADonor = () => {
                         Select District
                       </option>
                       {values.state &&
-                        getDistricts(values.state).map((district,i) => (
+                        getDistricts(values.state).map((district, i) => (
                           <option
-                        key={i}
+                            key={i}
                             value={district.name}
                             className={styles.optionValue}
                           >
@@ -223,17 +220,17 @@ const BecomeADonor = () => {
                         Select Mandal/Town
                       </option>
                       {values.district &&
-                        getTowns(values.state, values.district).map((town,i) => (
-                          
-                          <option
-                        key={i}
-
-                            value={town.name}
-                            className={styles.optionValue}
-                          >
-                            {town.name}
-                          </option>
-                        ))}
+                        getTowns(values.state, values.district).map(
+                          (town, i) => (
+                            <option
+                              key={i}
+                              value={town.name}
+                              className={styles.optionValue}
+                            >
+                              {town.name}
+                            </option>
+                          )
+                        )}
                     </Field>
                     {errors.mandal && touched.mandal ? (
                       <div className="errorText">{errors.mandal}</div>
@@ -253,7 +250,11 @@ const BecomeADonor = () => {
                   </div>
 
                   <button className={styles.button} type="submit">
-                    {loading ? <Spinner animation="border" /> : 'BECOME A DONOR'}          
+                    {loading ? (
+                      <Spinner animation="border" />
+                    ) : (
+                      "BECOME A DONOR"
+                    )}
                   </button>
                 </Form>
               );
