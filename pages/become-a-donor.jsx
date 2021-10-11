@@ -6,7 +6,9 @@ import BackArrow from "../icons/BackArrow";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import data from "../data.json";
+import locations from "../locations.json";
 import { GlobalContext } from "../context/GlobalState";
+import { getStates, getDistricts, getTowns } from "../helpers/getLocations";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -32,19 +34,7 @@ const BecomeADonor = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const getDistricts = (state) => {
-    const index = data.states.findIndex((item) => item.name === state);
-    return data.states[index].districts;
-  };
-
-  const getTowns = (state, district) => {
-    const index = data.states.findIndex((item) => item.name === state);
-    const stateIndex = data.states[index].districts;
-    const districtIndex = stateIndex.findIndex(
-      (item) => item.name === district
-    );
-    return stateIndex[districtIndex].towns;
-  };
+  const states = [...new Set(getStates())];
 
   return (
     <div className="pageContainer">
@@ -164,13 +154,13 @@ const BecomeADonor = () => {
                       <option value="0" className={styles.optionValue}>
                         Select State
                       </option>
-                      {data.states.map((state, i) => (
+                      {states.map((state, i) => (
                         <option
                           key={i}
-                          value={state.name}
+                          value={state}
                           className={styles.optionValue}
                         >
-                          {state.name}
+                          {state}
                         </option>
                       ))}
                     </Field>
@@ -192,15 +182,17 @@ const BecomeADonor = () => {
                         Select District
                       </option>
                       {values.state &&
-                        getDistricts(values.state).map((district, i) => (
-                          <option
-                            key={i}
-                            value={district.name}
-                            className={styles.optionValue}
-                          >
-                            {district.name}
-                          </option>
-                        ))}
+                        [...new Set(getDistricts(values.state))].map(
+                          (district, i) => (
+                            <option
+                              key={i}
+                              value={district}
+                              className={styles.optionValue}
+                            >
+                              {district}
+                            </option>
+                          )
+                        )}
                     </Field>
                     {errors.district && touched.district ? (
                       <div className="errorText">{errors.district}</div>
@@ -220,17 +212,17 @@ const BecomeADonor = () => {
                         Select Mandal/Town
                       </option>
                       {values.district &&
-                        getTowns(values.state, values.district).map(
-                          (town, i) => (
-                            <option
-                              key={i}
-                              value={town.name}
-                              className={styles.optionValue}
-                            >
-                              {town.name}
-                            </option>
-                          )
-                        )}
+                        [
+                          ...new Set(getTowns(values.state, values.district)),
+                        ].map((town, i) => (
+                          <option
+                            key={i}
+                            value={town}
+                            className={styles.optionValue}
+                          >
+                            {town}
+                          </option>
+                        ))}
                     </Field>
                     {errors.mandal && touched.mandal ? (
                       <div className="errorText">{errors.mandal}</div>

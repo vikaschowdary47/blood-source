@@ -1,10 +1,10 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import Router from "next/router";
-import { Row, Col, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import styles from "../styles/FindADonor.module.css";
 import BackArrow from "../icons/BackArrow";
-import { Button } from "react-bootstrap";
 import { Formik, Field, Form } from "formik";
+import { getStates, getDistricts, getTowns } from "../helpers/getLocations";
 
 import * as Yup from "yup";
 // import Check from "../icons/Check";
@@ -21,25 +21,25 @@ const SignupSchema = Yup.object().shape({
 
 const FindADonor = () => {
   // console.log({ data });
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const globalState = useContext(GlobalContext);
-  const {state,setFindADonorForm} = globalState
-  const {findADonorForm} = state;
+  const { state, setFindADonorForm } = globalState;
+  const { findADonorForm } = state;
 
-  const getDistricts = (state) => {
-    const index = data.states.findIndex((item) => item.name === state);
-    return data.states[index].districts;
-  };
+  // const getDistricts = (state) => {
+  //   const index = data.states.findIndex((item) => item.name === state);
+  //   return data.states[index].districts;
+  // };
 
-  const getTowns = (state, district) => {
-    const index = data.states.findIndex((item) => item.name === state);
-    const stateIndex = data.states[index].districts;
-    const districtIndex = stateIndex.findIndex(
-      (item) => item.name === district
-    );
-    return stateIndex[districtIndex].towns;
-  };
+  // const getTowns = (state, district) => {
+  //   const index = data.states.findIndex((item) => item.name === state);
+  //   const stateIndex = data.states[index].districts;
+  //   const districtIndex = stateIndex.findIndex(
+  //     (item) => item.name === district
+  //   );
+  //   return stateIndex[districtIndex].towns;
+  // };
 
   return (
     <div className="pageContainer">
@@ -59,8 +59,8 @@ const FindADonor = () => {
             initialValues={findADonorForm}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
-              setLoading(true)
-              setFindADonorForm(values)
+              setLoading(true);
+              setFindADonorForm(values);
               Router.push("/donors");
             }}
           >
@@ -93,10 +93,16 @@ const FindADonor = () => {
                       <option value="b-negative" className={styles.optionValue}>
                         B -
                       </option>
-                      <option value="ab-positive" className={styles.optionValue}>
+                      <option
+                        value="ab-positive"
+                        className={styles.optionValue}
+                      >
                         AB +
                       </option>
-                      <option value="ab-negative" className={styles.optionValue}>
+                      <option
+                        value="ab-negative"
+                        className={styles.optionValue}
+                      >
                         AB -
                       </option>
                       <option value="o-positive" className={styles.optionValue}>
@@ -125,7 +131,7 @@ const FindADonor = () => {
                       </option>
                       {data.states.map((state, i) => (
                         <option
-                        key={i}
+                          key={i}
                           value={state.name}
                           className={styles.optionValue}
                         >
@@ -151,16 +157,17 @@ const FindADonor = () => {
                         Select District
                       </option>
                       {values.state &&
-                        getDistricts(values.state).map((district,i) => (
-                          <option
-                        key={i}
-
-                            value={district.name}
-                            className={styles.optionValue}
-                          >
-                            {district.name}
-                          </option>
-                        ))}
+                        [...new Set(getDistricts(values.state))].map(
+                          (district, i) => (
+                            <option
+                              key={i}
+                              value={district}
+                              className={styles.optionValue}
+                            >
+                              {district}
+                            </option>
+                          )
+                        )}
                     </Field>
                     {errors.district && touched.district ? (
                       <div className="errorText">{errors.district}</div>
@@ -180,14 +187,15 @@ const FindADonor = () => {
                         Select Mandal/Town
                       </option>
                       {values.district &&
-                        getTowns(values.state, values.district).map((town,i) => (
+                        [
+                          ...new Set(getTowns(values.state, values.district)),
+                        ].map((town, i) => (
                           <option
-                        key={i}
-
-                            value={town.name}
+                            key={i}
+                            value={town}
                             className={styles.optionValue}
                           >
-                            {town.name}
+                            {town}
                           </option>
                         ))}
                     </Field>
@@ -210,8 +218,7 @@ const FindADonor = () => {
                   </div>
 
                   <button className={styles.button} type="submit">
-                    {loading ? <Spinner animation="border" /> : 'FIND A DONOR '}
-
+                    {loading ? <Spinner animation="border" /> : "FIND A DONOR "}
                   </button>
                 </Form>
               );
