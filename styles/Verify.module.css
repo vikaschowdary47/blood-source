@@ -1,0 +1,133 @@
+
+.findADonorContainer{
+    padding: 15px;
+    /* height: 100vh; */
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+
+}
+.nav svg{
+    cursor: pointer;
+    margin-right: 20px;
+    width: 32px;
+    height: 25px;
+}
+.nav h1{
+    margin: 0;
+    font-size:22px;
+    font-weight:600;
+}
+.form{
+    margin-top: 50px;
+}
+
+.fieldContainer{
+    margin: 20px 0;
+    padding: 0 10px
+}
+.fieldContainer:focus-visible{
+   outline:none
+}
+.button{
+    background-color:#FF215D;
+    border-radius: 25px;
+    font-size: 18px;
+    /* font-weight:600; */
+    /* width:100%; */
+    border:none;
+    padding:10px;
+    color:white;
+}
+.resendButton{
+    background:none;
+    border:none;
+    color:#FF215D
+}
+.clearButton{
+    margin: auto;
+    padding: 10px 20px;
+
+}
+.clearContainer{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+}
+.buttonContainer{
+    display:flex;
+    justify-content:space-between;
+    padding: 0 60px
+}
+.button:hover{
+    background-color:#FF215D;
+    border:none
+}
+
+.otpContainer{
+    margin:30px 0;
+}
+.otpContainer h1{
+    font-size:18px;
+    font-weight:600
+}
+.otpContainer span{
+    color:rgb(158, 154, 154);
+}
+.otpContainer span a{
+    color:#FF215D !important;
+    cursor:pointer;
+    margin-left:12px
+}
+
+.otpInput{
+    height:70px;
+    width: 70px;
+    border-radius: 50%;
+    padding-left: 27px;
+    border: 1px solid black;
+}
+.otpFieldContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+.otpVerifyContainer{
+    padding:15px;
+    /* background-color:red */
+    box-shadow: 10px 10px 7px -1px rgba(207,195,195,0.51);
+-webkit-box-shadow: 10px 10px 7px -1px rgba(207,195,195,0.51);
+-moz-box-shadow: 10px 10px 7px -1px rgba(207,195,195,0.51);
+}
+
+
+.thankyouContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* margin: 50px 0; */
+    height:100vh
+}
+
+.thankyouContainer h2{
+    font-size: 16px;
+    font-weight:600;
+    color:#FF275B
+}
+
+.thankyouContainer img{
+margin: 30px 0;
+}
+
+.thankText{
+    /* font-size: 16px; */
+    font-weight:600;
+    color:#FF275B;
+    margin: 70px 0;
+}

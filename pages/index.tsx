@@ -3,6 +3,7 @@ import Router from "next/router";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
+
   return (
     <div className={styles.homeContainer}>
       <img src="/images/redBanner.png" className={styles.mainBannerImage} />
@@ -25,7 +26,7 @@ const Home = () => {
         >
           <div className={styles.becomeButtonText}>BECOME A DONOR</div>
         </button>
-        <img src="/images/becomeADonor.png" />
+        <img src="/images/becomeADonor.png" alt="becomeADonor"/>
       </div>
       {/* <img src="/images/waves.png" width="100" /> */}
 

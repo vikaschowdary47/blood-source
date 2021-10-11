@@ -1,3 +1,4 @@
+
 .findADonorContainer{
     padding: 15px;
     /* height: 100vh; */
@@ -9,6 +10,7 @@
 
 }
 .nav svg{
+    cursor: pointer;
     margin-right: 20px;
     width: 32px;
     height: 25px;
@@ -18,10 +20,16 @@
     font-size:22px;
     font-weight:600;
 }
+.form{
+    margin-top: 50px;
+}
 
 .fieldContainer{
     margin: 20px 0;
     padding: 0 10px
+}
+.fieldContainer:focus-visible{
+   outline:none
 }
 .button{
     background-color:#FF215D;

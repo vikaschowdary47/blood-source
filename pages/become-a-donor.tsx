@@ -1,15 +1,23 @@
-import React, { useRef } from "react";
+import React, {useState, useContext } from "react";
 import Router from "next/router";
-import { Row, Col } from "react-bootstrap";
+import {Spinner } from "react-bootstrap";
 import styles from "../styles/FindADonor.module.css";
 import BackArrow from "../icons/BackArrow";
-import { Button } from "react-bootstrap";
 import { Formik, Field, Form } from "formik";
-
 import * as Yup from "yup";
-import Check from "../icons/Check";
+import data from "../data.json";
+import { GlobalContext } from "../context/GlobalState";
+
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const SignupSchema = Yup.object().shape({
+  name: Yup.string().required("Required"),
+  mobile: Yup.string()
+    .min(10)
+    .max(10)
+    .matches(phoneRegExp, "Phone number is not valid")
+    .required("Required"),
   bloodGroup: Yup.string().required("Required"),
   state: Yup.string().required("Required"),
   district: Yup.string().required("Required"),
@@ -17,7 +25,27 @@ const SignupSchema = Yup.object().shape({
   donorPrivacy: Yup.bool().required("Required"),
 });
 
-const FindADonor = () => {
+const BecomeADonor = () => {
+  const globalState = useContext(GlobalContext);
+  const {state,setOtp,setBecomeADonorForm} = globalState
+  const {becomeADonorForm} = state;
+
+  const [loading,setLoading] = useState(false)
+
+  const getDistricts = (state:String) => {
+    const index = data.states.findIndex((item) => item.name === state);
+    return data.states[index].districts;
+  };
+
+  const getTowns = (state:String, district:String) => {
+    const index = data.states.findIndex((item) => item.name === state);
+    const stateIndex = data.states[index].districts;
+    const districtIndex = stateIndex.findIndex(
+      (item) => item.name === district
+    );
+    return stateIndex[districtIndex].towns;
+  };
+
   return (
     <div className="pageContainer">
       <div className={styles.findADonorContainer}>
@@ -30,26 +58,60 @@ const FindADonor = () => {
           >
             <BackArrow />
           </div>
-          <h1>FIND A DONOR</h1>
+          <h1>BECOME A DONOR</h1>
         </div>
         <div>
           <Formik
-            initialValues={{
-              bloodGroup: "",
-              state: "",
-              district: "",
-              mandal: "",
-              donorPrivacy: false,
-            }}
+            initialValues={becomeADonorForm}
             validationSchema={SignupSchema}
-            onSubmit={(values) => {
-              // console.log(values);
-              Router.push("/donors");
+            onSubmit={async(values) => {
+              setLoading(true);
+              setBecomeADonorForm(values)
+              const otp = Math.floor(1000 + Math.random() * 9000);
+              setOtp(otp)
+              const url = `https://cors.bridged.cc/${process.env.passoo_url}?key=${process.env.passoo_key}&secret=${process.env.passoo_secret_key}&from=FinWise&to=91${values.mobile}&text=OTP+for+registration+is+:+${otp}`
+              const sendOtpRequest = await fetch(
+                url,
+                {
+                  method: "GET",
+                  headers: { "Access-Control-Allow-Origin": "*" },
+                }          
+              )
+              const response = await sendOtpRequest.json()
+              if(response && response.status === '0'){
+              setLoading(false)
+                Router.push("/verify")
+              }
             }}
           >
-            {({ errors, touched, values, handleChange }) => {
+            {({ errors, touched, values }) => {
               return (
-                <Form>
+                <Form className={styles.form}>
+                  <div className={styles.fieldContainer}>
+                    <Field
+                      id="name"
+                      name="name"
+                      placeholder="Name"
+                      className="form-input"
+                      // value={values.name}
+                      required
+                    />
+                    {errors.name && touched.name ? (
+                      <div className="errorText">{errors.name}</div>
+                    ) : null}
+                  </div>
+                  <div className={styles.fieldContainer}>
+                    <Field
+                      id="mobile"
+                      name="mobile"
+                      placeholder="Mobile"
+                      className="form-input"
+                      required
+                    />
+                    {errors.mobile && touched.mobile ? (
+                      <div className="errorText">{errors.mobile}</div>
+                    ) : null}
+                  </div>
                   <div className={styles.fieldContainer}>
                     <Field
                       as="select"
@@ -105,18 +167,15 @@ const FindADonor = () => {
                       <option value="0" className={styles.optionValue}>
                         Select State
                       </option>
-                      <option value="1" className={styles.optionValue}>
-                        Ap
-                      </option>
-                      <option value="2" className={styles.optionValue}>
-                        Tp
-                      </option>
-                      <option value="3" className={styles.optionValue}>
-                        HP
-                      </option>
-                      <option value="4" className={styles.optionValue}>
-                        KN
-                      </option>
+                      {data.states.map((state, i) => (
+                        <option
+                        key={i}
+                          value={state.name}
+                          className={styles.optionValue}
+                        >
+                          {state.name}
+                        </option>
+                      ))}
                     </Field>
                     {errors.state && touched.state ? (
                       <div className="errorText">{errors.state}</div>
@@ -135,18 +194,16 @@ const FindADonor = () => {
                       <option value="0" className={styles.optionValue}>
                         Select District
                       </option>
-                      <option value="1" className={styles.optionValue}>
-                        Ap
-                      </option>
-                      <option value="2" className={styles.optionValue}>
-                        Tp
-                      </option>
-                      <option value="3" className={styles.optionValue}>
-                        HP
-                      </option>
-                      <option value="4" className={styles.optionValue}>
-                        KN
-                      </option>
+                      {values.state &&
+                        getDistricts(values.state).map((district,i) => (
+                          <option
+                        key={i}
+                            value={district.name}
+                            className={styles.optionValue}
+                          >
+                            {district.name}
+                          </option>
+                        ))}
                     </Field>
                     {errors.district && touched.district ? (
                       <div className="errorText">{errors.district}</div>
@@ -165,18 +222,18 @@ const FindADonor = () => {
                       <option value="0" className={styles.optionValue}>
                         Select Mandal/Town
                       </option>
-                      <option value="1" className={styles.optionValue}>
-                        Ap
-                      </option>
-                      <option value="2" className={styles.optionValue}>
-                        Tp
-                      </option>
-                      <option value="3" className={styles.optionValue}>
-                        HP
-                      </option>
-                      <option value="4" className={styles.optionValue}>
-                        KN
-                      </option>
+                      {values.district &&
+                        getTowns(values.state, values.district).map((town,i) => (
+                          
+                          <option
+                        key={i}
+
+                            value={town.name}
+                            className={styles.optionValue}
+                          >
+                            {town.name}
+                          </option>
+                        ))}
                     </Field>
                     {errors.mandal && touched.mandal ? (
                       <div className="errorText">{errors.mandal}</div>
@@ -191,13 +248,12 @@ const FindADonor = () => {
                         className={styles.checkmark}
                         required
                       />
-                      By confirming you agree that you&apos;re not going to
-                      mis-use donor&apos;s details.
+                      By registering we make your contact visible for others.
                     </div>
                   </div>
 
                   <button className={styles.button} type="submit">
-                    FIND A DONOR
+                    {loading ? <Spinner animation="border" /> : 'BECOME A DONOR'}          
                   </button>
                 </Form>
               );
@@ -209,4 +265,4 @@ const FindADonor = () => {
   );
 };
 
-export default FindADonor;
+export default BecomeADonor;

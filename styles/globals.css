@@ -30,6 +30,19 @@ a {
   border-radius: 999px;
   color: 'black';
 }
+.form-input {
+  border: none !important;
+  background-color: #EFEFEF;
+  border-radius: 999px;
+  color: 'black';
+  width: 100%;
+  padding: .375rem 2.25rem .375rem .75rem;
+}
+
+
+.form-input:focus-visible{
+  outline:none
+}
 
 .form-select:focus {
   box-shadow: none !important;
@@ -38,6 +51,15 @@ a {
   color:red;
   margin-left: 10px;
   font-size: 14px;
+}
+.btn-primary:active:focus{
+  box-shadow: none !important;
+}
+.btn-primary:disabled {
+  box-shadow: none !important;
+  border: none;
+  background-color: lightgrey;
+  /* color:black */
 }
 
 

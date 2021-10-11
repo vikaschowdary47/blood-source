@@ -57,3 +57,14 @@
   .donorDetailsBody{
       margin-top:50px
   }
+  .noDataContainer{
+    margin-top:150px;
+    text-align: center;
+  }
+
+  .nav svg{
+    cursor: pointer;
+    margin-right: 20px;
+    width: 32px;
+    height: 25px;
+}

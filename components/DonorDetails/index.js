@@ -10,7 +10,7 @@ const DonorDetails = ({ donor }) => {
       <div className={styles.detailsBody}>
         <div>
           {donor.name}
-          <div className={styles.location}>{donor.location}</div>
+          <div className={styles.location}>{donor.mandal}</div>
           <div className={styles.contactContainer}>
             <a href={`tel:${donor.mobile}`} className={styles.makeACall}>
               MAKE A CALL
