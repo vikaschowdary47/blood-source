@@ -81,7 +81,7 @@ const BecomeADonor = () => {
               <h1>VERIFY NUMBER</h1>
             </div>
             <span>
-              Enter OTP sent to +91 1234567890{" "}
+              Enter OTP sent to +91 {becomeADonorForm.mobile}{" "}
               <a onClick={() => window.history.back()}>Edit</a>
             </span>
           </div>
