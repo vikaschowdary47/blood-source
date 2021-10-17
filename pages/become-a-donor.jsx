@@ -57,12 +57,13 @@ const BecomeADonor = () => {
               setBecomeADonorForm(values);
               const otp = Math.floor(1000 + Math.random() * 9000);
               setOtp(otp);
-              const url = `https://cors.bridged.cc/${process.env.passoo_url}?key=${process.env.passoo_key}&secret=${process.env.passoo_secret_key}&from=FinWise&to=91${values.mobile}&text=OTP+for+registration+is+:+${otp}`;
+              const url = `https://muneer-cors.herokuapp.com/${process.env.passoo_url}?key=${process.env.passoo_key}&secret=${process.env.passoo_secret_key}&from=FinWise&to=91${values.mobile}&text=OTP+for+registration+is+:+${otp}`;
               const sendOtpRequest = await fetch(url, {
                 method: "GET",
                 headers: { "Access-Control-Allow-Origin": "*" },
               });
               const response = await sendOtpRequest.json();
+              console.log({ response });
               if (response && response.status === "0") {
                 setLoading(false);
                 Router.push("/verify");
