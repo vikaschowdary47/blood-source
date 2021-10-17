@@ -5,8 +5,6 @@ import styles from "../styles/FindADonor.module.css";
 import BackArrow from "../icons/BackArrow";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import data from "../data.json";
-import locations from "../locations.json";
 import { GlobalContext } from "../context/GlobalState";
 import { getStates, getDistricts, getTowns } from "../helpers/getLocations";
 

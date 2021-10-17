@@ -8,7 +8,7 @@ import { getStates, getDistricts, getTowns } from "../helpers/getLocations";
 
 import * as Yup from "yup";
 // import Check from "../icons/Check";
-import data from "../data.json";
+// import data from "../data.json";
 import { GlobalContext } from "../context/GlobalState";
 
 const SignupSchema = Yup.object().shape({
@@ -26,6 +26,8 @@ const FindADonor = () => {
   const globalState = useContext(GlobalContext);
   const { state, setFindADonorForm } = globalState;
   const { findADonorForm } = state;
+
+  const states = [...new Set(getStates())];
 
   // const getDistricts = (state) => {
   //   const index = data.states.findIndex((item) => item.name === state);
@@ -129,13 +131,13 @@ const FindADonor = () => {
                       <option value="0" className={styles.optionValue}>
                         Select State
                       </option>
-                      {data.states.map((state, i) => (
+                      {states.map((state, i) => (
                         <option
                           key={i}
-                          value={state.name}
+                          value={state}
                           className={styles.optionValue}
                         >
-                          {state.name}
+                          {state}
                         </option>
                       ))}
                     </Field>
