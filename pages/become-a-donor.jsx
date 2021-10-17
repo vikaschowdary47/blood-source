@@ -63,7 +63,6 @@ const BecomeADonor = () => {
                 headers: { "Access-Control-Allow-Origin": "*" },
               });
               const response = await sendOtpRequest.json();
-              console.log({ response });
               if (response && response.status === "0") {
                 setLoading(false);
                 Router.push("/verify");
