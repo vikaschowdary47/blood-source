@@ -24,9 +24,15 @@ function MyApp({ Component, pageProps }:main) {
   return (
     <>
       <Head>
-        <title>Blood Source</title>
         <meta name="description" content="The Blood way, a way to help"></meta>\
-        
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+            integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+            crossOrigin="anonymous"
+          />
+        <title>Blood Source</title>
+
       </Head>
       <GlobalContextProvider>
       <Component {...pageProps} />

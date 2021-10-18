@@ -27,7 +27,7 @@ const Home = ({donors}:any) => {
         </button>
         <img src="/images/becomeADonor.png" alt="becomeADonor"/>
       </div>
-      <img src="/images/waves.png" width="100" />
+      {/* <img src="/images/waves.png" width="100" /> */}
 
       <div className={styles.mainQuote}>
         <blockquote>
